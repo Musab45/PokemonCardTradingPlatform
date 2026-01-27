@@ -15,3 +15,9 @@ class ConflictError(PokemonCardTradingPlatformException):
     
     def __init__(self, message: str = 'Resource conflict'):
         super().__init__(message, status_code=409)
+        
+class NotFoundError(PokemonCardTradingPlatformException):
+    """Exception raised when a resource is not found."""
+    
+    def __init__(self, message: str = "Resource not found"):
+        super().__init__(message, status_code=404)

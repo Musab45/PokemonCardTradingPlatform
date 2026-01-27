@@ -10,6 +10,10 @@ class TypeCreate(TypeBase):
     """Create Type Schema"""
     pass
 
+class TypeUpdate(TypeBase):
+    """Update Type Schema"""
+    pass
+
 class TypeResponse(TypeBase):
     """Schema for Type Response"""
     

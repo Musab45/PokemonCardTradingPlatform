@@ -9,6 +9,11 @@ class TypeRepository(BaseRepository[Type]):
     def __init__(self, db: Session):
         super().__init__(Type, db)
         
+    def get_all(self) -> list[Type]:
+        """Get all Types"""
+        query = select(Type)
+        return self.db.execute(query).scalars().all()
+        
     def get_by_name(self, name: str) -> Optional[Type]:
         """Get a Type by name."""
         query = select(Type).filter(Type.name == name)

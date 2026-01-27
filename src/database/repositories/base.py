@@ -11,8 +11,25 @@ class BaseRepository(Generic[ModelType]):
         self.model = model
         self.db = db
         
+    def get(self, id: UUID) -> Optional[ModelType]:
+        """Get a single record by ID."""
+        return self.db.get(self.model, id)
+        
     def create(self, obj: ModelType) -> ModelType:
         self.db.add(obj)
         self.db.commit()
         self.db.refresh(obj)
         return obj
+    
+    def update(self, obj: ModelType) -> ModelType:
+        self.db.commit()
+        self.db.refresh(obj)
+        return obj
+    
+    def delete(self, id: UUID) -> bool:
+        obj = self.get(id)
+        if obj:
+            self.db.delete(obj)
+            self.db.commit()
+            return True
+        return False
